@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nyist.edu.cn.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="nyist.edu.cn.entity.Role" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_ms" property="roleMs" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  
+  <!-- 自定义添加 (授权)   editRoleGrant-->
+  <insert id="editRoleGrant" parameterType="java.util.Map">
+  	insert into role_node(r_id,n_id) values
+  	<foreach collection="nodes" separator="," item="n_id">
+  		(#{rId},#{n_id})
+  	</foreach>
+  </insert>
+</mapper>

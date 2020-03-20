@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nyist.edu.cn.mapper.PlMapper" >
+  <resultMap id="BaseResultMap" type="nyist.edu.cn.entity.Pl" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="views" property="views" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    
+   <association property="user" javaType="nyist.edu.cn.entity.User">
+   		 <id column="uuid" property="id" jdbcType="INTEGER" />
+   		 <result column="uname" property="username" jdbcType="VARCHAR" />
+   		 <result column="uimg" property="img" jdbcType="VARCHAR" />
+   </association>
+    
+  </resultMap>
+  
+  <select id="selectPlAndUser" parameterType="int" resultMap="BaseResultMap">
+  	select p.* ,u.id as uuid,u.username as uname,u.img as uimg from pl p left join user u on p.uid=u.id where p.cid=#{cid} order by p.id desc
+  </select> 
+  
+   <select id="findFivePl" parameterType="int" resultMap="BaseResultMap">
+  	select p.* ,u.id as uuid,u.username as uname,u.img as uimg from pl p left join user u on p.uid=u.id where p.cid=#{cid} order by id desc limit 5
+  </select> 
+  
+</mapper>
