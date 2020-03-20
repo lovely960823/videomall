@@ -1,4 +1,4 @@
-/*运行Sql文件即可*/
+/*Sql文件即可*/
 /*
 Navicat MySQL Data Transfer
 
